@@ -1,12 +1,42 @@
-# React + Vite
+# 🌱 AgriEngage – Intelligent Agriculture Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AgriEngage is a **forecasting and engagement platform** for farmers and agricultural authorities.  
+It uses region & season-based analytics to recommend crops, track demand, and provide insights for sustainable agriculture.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- 📊 **Dynamic KPIs** – Demand Index, Active Farmers, Avg. Yield, Rainfall  
+- 🌾 **Recommended Crops Section** – Seasonal crop suggestions for farmers  
+- 👩‍🌾 **Farmer View** – Region & season-based personalized dashboard  
+- 🏛️ **Authority View** – Insights for policymakers and agricultural officers  
+- 🎨 **Modern UI** – Built with **React + Tailwind CSS + Recharts**  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+- **Frontend**: React, Tailwind CSS, Recharts  
+- **State Management**: React Hooks (`useState`, `useMemo`)  
+- **Backend (Planned for MERN Integration)**: Node.js, Express, MongoDB  
+
+---
+
+## 📸 Screenshots
+*(Add screenshots of your dashboard here after deployment!)*  
+
+---
+
+## ⚙️ Setup & Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/iharini23/AgriEngage-Intelligent-Agriculture.git
+
+# Navigate into the project
+cd AgriEngage-Intelligent-Agriculture
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm start
