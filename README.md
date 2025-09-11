@@ -1,29 +1,23 @@
-# 🌱 AgriEngage – Intelligent Agriculture Dashboard
+#  AgriEngage – Intelligent Agriculture Dashboard
 
 AgriEngage is a **forecasting and engagement platform** for farmers and agricultural authorities.  
 It uses region & season-based analytics to recommend crops, track demand, and provide insights for sustainable agriculture.  
 
 ---
 
-## 🚀 Features
-- 📊 **Dynamic KPIs** – Demand Index, Active Farmers, Avg. Yield, Rainfall  
-- 🌾 **Recommended Crops Section** – Seasonal crop suggestions for farmers  
-- 👩‍🌾 **Farmer View** – Region & season-based personalized dashboard  
-- 🏛️ **Authority View** – Insights for policymakers and agricultural officers  
-- 🎨 **Modern UI** – Built with **React + Tailwind CSS + Recharts**  
+##  Features
+-  **Dynamic KPIs** – Demand Index, Active Farmers, Avg. Yield, Rainfall  
+-  **Recommended Crops Section** – Seasonal crop suggestions for farmers  
+-  **Farmer View** – Region & season-based personalized dashboard  
+-  **Authority View** – Insights for policymakers and agricultural officers  
+-  **Modern UI** – Built with **React + Tailwind CSS + Recharts**  
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 - **Frontend**: React, Tailwind CSS, Recharts  
 - **State Management**: React Hooks (`useState`, `useMemo`)  
 - **Backend (Planned for MERN Integration)**: Node.js, Express, MongoDB  
-
----
-
-## 📸 Screenshots
-*(Add screenshots of your dashboard here after deployment!)*  
-
 ---
 
 ## ⚙️ Setup & Installation
