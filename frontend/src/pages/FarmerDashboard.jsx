@@ -4,15 +4,15 @@ import EngagementLine from "../components/charts/EngagementLine";
 import WeatherEngagementArea from "../components/charts/WeatherEngagementArea";
 import { Sprout, CloudSun, Activity } from "lucide-react";
 import { COLORS } from "../data/mock";
-import { getCrops, getEngagements, getWeather } from "../services/api";
+import { getCrops, getEngagements, getWeatherEngagement } from "../services/api";
 
 export default function FarmerDashboard({ region, season, kpis }) {
   const [crops, setCrops] = useState([]);
   const [engagementData, setEngagementData] = useState([]);
-  const [weatherData, setWeatherData] = useState([]);
+  const [weatherEngagementData, setWeatherEngagementData] = useState([]);
   const [loadingCrops, setLoadingCrops] = useState(true);
   const [loadingEngagement, setLoadingEngagement] = useState(true);
-  const [loadingWeather, setLoadingWeather] = useState(true);
+  const [loadingWeatherEngagement, setLoadingWeatherEngagement] = useState(true);
 
   const demandIndex = parseInt(kpis.find(k => k.label === "Demand Index")?.value || 0);
 
@@ -43,22 +43,30 @@ export default function FarmerDashboard({ region, season, kpis }) {
       .finally(() => setLoadingEngagement(false));
   }, []);
 
-  // Fetch weather data and format for chart
+  // Fetch weather ↔ engagement data and format for chart
   useEffect(() => {
-    setLoadingWeather(true);
-    getWeather()
-      .then(data => {
-        if (!Array.isArray(data)) return setWeatherData([]);
-        const formatted = data.map(d => ({
-          week: `${new Date(d.date).toLocaleString("default", { month: "short" })} ${new Date(d.date).getDate()}`,
-          rainfall: Number(d.rainfall) || 0,
-          engagement: Number(d.engagement) || 0
+    setLoadingWeatherEngagement(true);
+    getWeatherEngagement()
+      .then(res => {
+        console.log("FULL WEATHER ↔ ENGAGEMENT RESPONSE:", res);
+
+        if (!res.engagements || !res.weather) {
+          setWeatherEngagementData([]);
+          return;
+        }
+
+        // Combine engagements array with single weather object
+        const formatted = res.engagements.map(e => ({
+          week: e.week || (e.date ? `${new Date(e.date).toLocaleString("default", { month: "short" })} ${new Date(e.date).getDate()}` : "N/A"),
+          rainfall: Number(res.weather.rainfall || 0),
+          engagement: Number(e.engaged || 0)
         }));
-        console.log("✅ Formatted Weather Data:", formatted);
-        setWeatherData(formatted);
+
+        console.log("✅ Formatted Weather ↔ Engagement Data:", formatted);
+        setWeatherEngagementData(formatted);
       })
-      .catch(err => console.warn("Error fetching weather data:", err))
-      .finally(() => setLoadingWeather(false));
+      .catch(err => console.warn("Error fetching weather-engagement data:", err))
+      .finally(() => setLoadingWeatherEngagement(false));
   }, []);
 
   return (
@@ -109,12 +117,12 @@ export default function FarmerDashboard({ region, season, kpis }) {
 
       {/* Weather ↔ Engagement */}
       <Section title="Weather ↔ Engagement" icon={CloudSun}>
-        {loadingWeather ? (
-          <p className="text-slate-500 text-center">Loading weather data...</p>
-        ) : weatherData.length === 0 ? (
-          <p className="text-slate-500 text-center">Weather data unavailable.</p>
+        {loadingWeatherEngagement ? (
+          <p className="text-slate-500 text-center">Loading weather-engagement data...</p>
+        ) : weatherEngagementData.length === 0 ? (
+          <p className="text-slate-500 text-center">Weather-engagement data unavailable.</p>
         ) : (
-          <WeatherEngagementArea data={weatherData} />
+          <WeatherEngagementArea data={weatherEngagementData} />
         )}
       </Section>
     </div>

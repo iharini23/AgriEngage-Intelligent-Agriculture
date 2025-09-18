@@ -14,22 +14,28 @@ app.use(cors());
 app.use(express.json());
 
 // DB Connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.error("❌ MongoDB Connection Failed:", err));
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => {
+    console.error("❌ MongoDB Connection Failed:", err.message);
+    process.exit(1); // exit if db fails
+  });
 
 // Routes
-const cropRoutes = require("./routes/crops");
-const engagementRoutes = require("./routes/engagement");
-const weatherRoutes = require("./routes/weather");
+try {
+  const cropRoutes = require("./routes/crops");
+  const engagementRoutes = require("./routes/engagement");
+  const weatherRoutes = require("./routes/weather");
+  const weatherEngagementRoutes = require("./routes/weatherEngagement"); // ⬅️ NEW
 
-// Use proper route paths
-app.use("/api/crops", cropRoutes);
-app.use("/api/engagement", engagementRoutes); // <-- plural
-app.use("/api/weather", weatherRoutes);
+  app.use("/api/crops", cropRoutes);
+  app.use("/api/engagements", engagementRoutes);
+  app.use("/api/weather", weatherRoutes);
+  app.use("/api/weather-engagement", weatherEngagementRoutes); // ⬅️ NEW
+} catch (err) {
+  console.error("❌ Route loading failed:", err.message);
+}
 
 // Default route
 app.get("/", (req, res) => {
